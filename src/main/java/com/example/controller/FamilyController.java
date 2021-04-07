@@ -17,13 +17,13 @@ public class FamilyController {
     private FamilyService familyService;
 
     @GetMapping("/list")
-    public String toList(Model model) {
+    public String list(Model model) {
         model.addAttribute("familyList", familyService.findAll());
         return "listfamily"; //listfamily.html recojera los datos del Model model
     }
 
     @GetMapping("/list/orderbyname")
-    public String listORderByname(Model model) {
+    public String listOrderByname(Model model) {
         model.addAttribute("familyList", familyService.findAllOrderByName());
         return "listfamily"; //listfamily.html recojera los datos del Model model
     }
@@ -35,7 +35,7 @@ public class FamilyController {
     }
 
     @PostMapping ("/new/submit")
-    public String createSubmit(@ModelAttribute("family") Family f) {
+    public String addSubmit(@ModelAttribute("family") Family f) {
         familyService.save(f);
         return "redirect:/family/list";
     }
@@ -50,7 +50,7 @@ public class FamilyController {
     }
 
     @PostMapping ("/edit/submit")
-    public String updateSubmit(@ModelAttribute("family") Family f) {
+    public String editSubmit(@ModelAttribute("family") Family f) {
         familyService.save(f);
         return "redirect:/family/list";
     }
