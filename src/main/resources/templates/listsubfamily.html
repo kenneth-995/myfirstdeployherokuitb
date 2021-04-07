@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Subfamily List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body class="container">
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit" value="Logout" />
+    </form>
+    <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    No Authenticated </br>
+    <a href="/login">Login</a><br/>
+    <a href="/registre">Registre</a>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a href="/subfamily/list/orderbyname">Order by name</a>
+    </div>
+    <div class="col-12">
+        <a href="/">Go to Home</a>
+    </div>
+</div>
+
+<table class="table mt-5">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Family name</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subfamily : ${subfamilyList}">
+        <td th:text="${subfamily.id}" scope="row">ID</td>
+        <td th:text="${subfamily.name}">Pepe Pérez</td>
+        <td th:text="${subfamily.getFamily().getName()}">Pepe Pérez</td>
+        <td><a th:href="@{/subfamily/edit/{id}(id=${subfamily.id})}">Edit</a> </td>
+        <td><a th:href="@{/subfamily/delete/{id}(id=${subfamily.id})}">Delete</a> </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

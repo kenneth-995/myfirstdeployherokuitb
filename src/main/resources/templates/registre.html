@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Registre</h1>
+
+        <form   method="post"
+                th:action="@{/registre}"
+                th:object="${userForm}">
+
+            <div class="form-group">
+                <label> Usuari : </label>
+                <input type="text" name="username" th:field="*{username}" class="form-control "/>
+            </div>
+            <div class="form-group">
+                <label> Password: </label>
+                <input type="password" name="password" th:field="*{password}" class="form-control "/>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary btn-lg btn-block"/>
+            </div>
+
+            <div th:if="${create}" style="color: red">
+                Error, aquest nom d'usuari ja existeix
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
