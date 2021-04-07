@@ -37,7 +37,10 @@ public class SubfamilyController {
         return "listsubfamily"; //listfamily.html recojera los datos del Model model
     }
 
-    //TODO
+    //TODO findbyname
+
+    //TODO new subfamily
+
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable(value = "id")Long id) {
         Subfamily subfamily = subfamilyService.findById(id).orElse(null);
@@ -45,10 +48,9 @@ public class SubfamilyController {
         //transform entity to dto
         CreateUptateDTOSubfamily subfamilyDto = subfamilyDTOConverter.convertEntityToDto(subfamily);
         System.out.println("subfamilydto.getfamilyId (edit)" + subfamilyDto.getId());
-
-        model.addAttribute("subfamilydto", subfamilyDto);
+        model.addAttribute("subfamilydto", subfamilyDto); //rellenamos el formulario con los datos de la subfamilia
         List<Family> familyList = familyService.findAll();
-        model.addAttribute("familyList", familyList);
+        model.addAttribute("familyList", familyList); // rellenamos el select del formulario con las familias
 
         return "createeditsubfamily";
     }
@@ -58,6 +60,15 @@ public class SubfamilyController {
 
         Subfamily subfamily = subfamilyDTOConverter.convertDtoToEntity(subfamilydto);
         subfamilyService.save(subfamily);
+        return "redirect:/subfamily/list";
+    }
+
+    @GetMapping("/delete/{id}") // TODO: DeleteMapping?
+    public String delete(@PathVariable(value = "id")Long id){
+        Subfamily subfamily = subfamilyService.findById(id).orElse(null);
+        if (subfamily != null)
+            subfamilyService.delete(subfamily);
+
         return "redirect:/subfamily/list";
     }
 

@@ -16,7 +16,7 @@ public class FamilyService extends BaseService<Family, Long, FamilyRepository> {
 //    @Autowired
 //    private FamilyRepository familyRepository;
 
-    public List<FamilyRepository> findByName(String name) {
+    public List<Family> findByName(String name) {
         return this.repositorio.findByNameContainsIgnoreCase(name);
     }
 

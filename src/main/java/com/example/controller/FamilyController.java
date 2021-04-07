@@ -28,6 +28,14 @@ public class FamilyController {
         return "listfamily"; //listfamily.html recojera los datos del Model model
     }
 
+    @GetMapping("/list/findbyname") // http://localhost:5000/family/list/findbyname?name=ANTI
+    public String findByname(Model model, @RequestParam(value = "name") String name) {
+        System.out.println("name!!!!!! = " + name);
+
+        model.addAttribute("familyList", familyService.findByName(name));
+        return "listfamily"; //listfamily.html recojera los datos del Model model
+    }
+
     @GetMapping("/new")
     public String add(Model model) {
         model.addAttribute("family", new Family());
@@ -55,7 +63,7 @@ public class FamilyController {
         return "redirect:/family/list";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/delete/{id}") // TODO: DeleteMapping?
     public String delete(@PathVariable(value = "id")Long id){
         Family family = familyService.findById(id).orElse(null);
         if (family != null)

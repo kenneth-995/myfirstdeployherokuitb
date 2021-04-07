@@ -9,6 +9,8 @@ import java.util.List;
 public interface FamilyRepository extends JpaRepository<Family, Long>,
         JpaSpecificationExecutor<Family> {
 
-    List<FamilyRepository> findByNameContainsIgnoreCase(String name);
+    List<Family> findByNameContainsIgnoreCase(String name);
+
+
 
 }
