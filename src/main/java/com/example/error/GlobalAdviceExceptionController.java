@@ -1,6 +1,7 @@
 package com.example.error;
 
-import com.example.error.Family.FamilyNameNotFoundException;
+import com.example.error.Family.FamilyConstraintViolationException;
+import com.example.error.Family.FamilyInsertNameNotFoundException;
 import com.example.error.Family.FamilyNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,14 @@ public class GlobalAdviceExceptionController extends ResponseEntityExceptionHand
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
 
-    @ExceptionHandler(FamilyNameNotFoundException.class)
-    public ResponseEntity<ApiError> handleFamilyNameNotFound(FamilyNameNotFoundException ex) {
+    @ExceptionHandler(FamilyInsertNameNotFoundException.class)
+    public ResponseEntity<ApiError> handleFamilyNameNotFound(FamilyInsertNameNotFoundException ex) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+
+    @ExceptionHandler(FamilyConstraintViolationException.class)
+    public ResponseEntity<ApiError> handleFamilyConstraintViolation(FamilyConstraintViolationException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }

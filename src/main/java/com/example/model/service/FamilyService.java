@@ -4,6 +4,8 @@ import com.example.model.entity.Family;
 import com.example.model.repository.FamilyRepository;
 import com.example.model.service.base.BaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,13 @@ public class FamilyService extends BaseService<Family, Long, FamilyRepository> {
     }
 
     public List<Family> findAllOrderByName() {
-        return this.repositorio.findAll(Sort.by("name"));
+        return this.repositorio.findAll(Sort.by("name").descending());
     }
+
+    //REST
+    public Page<Family> findByName(String name, Pageable pageable){
+        return this.repositorio.findByNameContainsIgnoreCase(name, pageable);
+    }
+
 }
+

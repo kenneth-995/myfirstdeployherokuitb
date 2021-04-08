@@ -1,6 +1,8 @@
 package com.example.model.repository;
 
 import com.example.model.entity.Family;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -11,6 +13,7 @@ public interface FamilyRepository extends JpaRepository<Family, Long>,
 
     List<Family> findByNameContainsIgnoreCase(String name);
 
+    Page<Family> findByNameContainsIgnoreCase(String name, Pageable pageable);
 
 
 }

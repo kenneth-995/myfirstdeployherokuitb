@@ -30,8 +30,6 @@ public class FamilyController {
 
     @GetMapping("/list/findbyname") // http://localhost:5000/family/list/findbyname?name=ANTI
     public String findByname(Model model, @RequestParam(value = "name") String name) {
-        System.out.println("name!!!!!! = " + name);
-
         model.addAttribute("familyList", familyService.findByName(name));
         return "listfamily"; //listfamily.html recojera los datos del Model model
     }
