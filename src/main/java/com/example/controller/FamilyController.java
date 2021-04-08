@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/family")
+@RequestMapping("/web/family")
 public class FamilyController {
 
     @Autowired

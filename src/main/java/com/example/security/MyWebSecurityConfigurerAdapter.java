@@ -36,13 +36,20 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/registre","/empleats/list").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/family/**").permitAll()
-                .antMatchers("/family/list/**").permitAll()
-                .antMatchers("/family/new/**").permitAll()
-                .antMatchers("/subfamily/**").permitAll()
-                .antMatchers("/subfamily/list/**").permitAll()
-                .antMatchers("/subfamily/new/**").permitAll()
-
+                //WEB
+                .antMatchers("/web/family/**").permitAll()
+                .antMatchers("/web/family/list/**").permitAll()
+                .antMatchers("/web/family/new/**").permitAll()
+                .antMatchers("/web/subfamily/**").permitAll()
+                .antMatchers("/web/subfamily/list/**").permitAll()
+                .antMatchers("/web/subfamily/new/**").permitAll()
+                //API
+                .antMatchers("/api/family/**").permitAll()
+                .antMatchers("/api/family/list/**").permitAll()
+                .antMatchers("/api/family/new/**").permitAll()
+                .antMatchers("/api/subfamily/**").permitAll()
+                .antMatchers("/api/subfamily/list/**").permitAll()
+                .antMatchers("/api/subfamily/new/**").permitAll()
 
 //                .antMatchers(
 //                        "/empleats/edit/{id}").hasAnyRole("USER", "ADMIN") //"/empleats/list", **.hasAnyRole("USER", "ADMIN")**
@@ -63,8 +70,8 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .logout().permitAll();
 
         //development
-        http.csrf().disable(); //per h2-console
-        http.headers().frameOptions().disable(); //per h2-console
+        http.csrf().disable(); //h2-console
+        http.headers().frameOptions().disable(); //h2-console
 
     }
 }
