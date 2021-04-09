@@ -1,4 +1,4 @@
-package com.example.model.dto;
+package com.example.model.dto.subfamily;
 
 import lombok.*;
 
@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CreateUptateDTOSubfamily {
-    private Long id;
     private String name;
     private Long familyid;
 }

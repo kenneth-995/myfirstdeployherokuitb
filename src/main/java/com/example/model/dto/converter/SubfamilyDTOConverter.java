@@ -1,6 +1,6 @@
 package com.example.model.dto.converter;
 
-import com.example.model.dto.CreateUptateDTOSubfamily;
+import com.example.model.dto.subfamily.CreateUptateDTOSubfamily;
 import com.example.model.entity.Family;
 import com.example.model.entity.Subfamily;
 import com.example.model.service.FamilyService;
@@ -20,7 +20,6 @@ public class SubfamilyDTOConverter {
     public CreateUptateDTOSubfamily convertEntityToDto(Subfamily subfamily){
         System.out.println("convertEntityToDto(Subfamily subfamily) = " + subfamily.toString());
         CreateUptateDTOSubfamily s =  CreateUptateDTOSubfamily.builder()
-                .id(subfamily.getId())
                 .name(subfamily.getName())
                 .familyid(subfamily.getFamily().getId())
                 .build();
@@ -33,7 +32,6 @@ public class SubfamilyDTOConverter {
         Family family = familyService.findById(subfamilydto.getFamilyid()).orElse(null);
 
         return Subfamily.builder()
-                .id(subfamilydto.getId())
                 .name(subfamilydto.getName())
                 .family(family)
                 .build();

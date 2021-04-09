@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.model.dto.CreateUptateDTOSubfamily;
+import com.example.model.dto.subfamily.CreateUptateDTOSubfamily;
 import com.example.model.dto.converter.SubfamilyDTOConverter;
 import com.example.model.entity.Family;
 import com.example.model.entity.Subfamily;
@@ -47,7 +47,6 @@ public class SubfamilyController {
         System.out.println("subfamily= " +subfamily.toString());
         //transform entity to dto
         CreateUptateDTOSubfamily subfamilyDto = subfamilyDTOConverter.convertEntityToDto(subfamily);
-        System.out.println("subfamilydto.getfamilyId (edit)" + subfamilyDto.getId());
         model.addAttribute("subfamilydto", subfamilyDto); //rellenamos el formulario con los datos de la subfamilia
         List<Family> familyList = familyService.findAll();
         model.addAttribute("familyList", familyList); // rellenamos el select del formulario con las familias

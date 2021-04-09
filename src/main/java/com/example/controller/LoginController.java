@@ -37,14 +37,15 @@ public class LoginController {
     @PostMapping("/registre")
     public String submitUser(@ModelAttribute("userForm") Usuario u,
                              Model model) {
-        if (usuarioService.add(u)) {
-            //todo: no inserta en username en el formulario
-            model.addAttribute("userForm.username", u.getUsername());
+        Usuario user = usuarioService.getByUsername(u.getUsername());
+        if (user == null) {
+            usuarioService.add(u);
             return "redirect:/login";
-        } else {
-            model.addAttribute("create", true);
+        } else { //existe
+            model.addAttribute("exist", true);
             return "registre";
         }
+
 
     }
 }

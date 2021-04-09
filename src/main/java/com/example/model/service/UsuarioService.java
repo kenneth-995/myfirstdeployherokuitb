@@ -21,19 +21,16 @@ public class UsuarioService extends BaseService<Usuario, String, UsuarioReposito
 
     public Usuario getByUsername(String username) { return usuarioRepository.findByUsername(username);}
 
-    public boolean add(Usuario u) {
-        if (getByUsername(u.getUsername()) == null) {
+    public void add(Usuario u) {
+        if (getByUsername(u.getUsername()) == null &&
+        u.getPassword() != null) {
             System.out.println("El usuario no existe");
             u.setRole("USER");
             u.setPassword(passwordEncoder().encode(u.getPassword()));
             usuarioRepository.save(u);
-            return true;
         } else {
-            System.out.println("El usuario existe! no podemos crearlo");
-            return false;
+            System.out.println("No se pudo crear el usuario");
         }
-
-
     }
 
     @PostConstruct
