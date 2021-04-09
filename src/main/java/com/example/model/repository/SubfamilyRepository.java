@@ -10,4 +10,6 @@ public interface SubfamilyRepository extends JpaRepository<Subfamily, Long>,
         JpaSpecificationExecutor<Subfamily> {
 
      Page<Subfamily> findByNameContainsIgnoreCase(String name, Pageable pageable) ;
+
+     Page<Subfamily> findByFamily_Id(Long id, Pageable pageable);
 }

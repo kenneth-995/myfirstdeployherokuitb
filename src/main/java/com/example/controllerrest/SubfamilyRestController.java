@@ -1,15 +1,12 @@
 package com.example.controllerrest;
 
-import com.example.error.Family.FamilyNotFoundException;
 import com.example.error.subfamily.SubfamilyNotFoundException;
 import com.example.model.dto.converter.SubfamilyDTOConverter;
 import com.example.model.dto.subfamily.CreateUptateDTOSubfamily;
-import com.example.model.entity.Family;
 import com.example.model.entity.Subfamily;
 import com.example.model.service.FamilyService;
 import com.example.model.service.SubfamilyService;
 import com.example.utils.pagination.PaginationLinksUtil;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/subfamily")
 @RequiredArgsConstructor
 public class SubfamilyRestController {
+    //TODO: pasar codigo del controller hacia el servicio
 
     private final SubfamilyService subfamilyService;
     private final FamilyService familyService;
@@ -33,14 +32,15 @@ public class SubfamilyRestController {
 
     private final PaginationLinksUtil paginationLinksUtil;
 
-    @GetMapping("/")
-    public ResponseEntity<?> getAll(@PageableDefault(size = 10, page = 0) Pageable pageable,
-                                    HttpServletRequest request) {
-        Page<Subfamily> result = subfamilyService.findAll(pageable);
-
-        if (result.isEmpty()) {
+    @GetMapping("/") //el parametro familyid no funciona por las specifications!
+    public ResponseEntity<?> getAllWithArgs(@PageableDefault(size = 10, page = 0) Pageable pageable,
+                                            HttpServletRequest request,
+                                            @RequestParam("name") Optional<String> name,
+                                            @RequestParam("familyid") Optional<Long> familyid) {
+        Page<Subfamily> result = subfamilyService.findByArgs(name, familyid, pageable);
+        if (result.isEmpty())
             throw new SubfamilyNotFoundException();
-        } else {
+        else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
                     "link",
@@ -48,6 +48,31 @@ public class SubfamilyRestController {
                     .body(result);
         }
     }
+
+
+    @GetMapping("/{id}")
+    public Subfamily getOne(@PathVariable("id") Long id) {
+        return subfamilyService.findById(id).orElseThrow(() -> new SubfamilyNotFoundException(id));
+    }
+
+
+    @GetMapping("/family/{id}")
+    public ResponseEntity<?> getSubfamilyByFamilyId(@PageableDefault(size = 10, page = 0) Pageable pageable,
+                                       HttpServletRequest request,
+                                       @PathVariable("id") Long id) {
+        Page<Subfamily> result = subfamilyService.findByFamilyId(id, pageable);
+
+        if (result.isEmpty())
+            throw new SubfamilyNotFoundException();
+        else {
+            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
+            return ResponseEntity.ok().header(
+                    "link",
+                    paginationLinksUtil.createLinkHeader(result, uriBuilder))
+                    .body(result);
+        }
+    }
+
 
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody CreateUptateDTOSubfamily dto){
@@ -58,13 +83,12 @@ public class SubfamilyRestController {
     }
 
 
-    //TODO get by name, by id, by id family, by family name
-
     @PutMapping("/{id}")
     public Subfamily edit(@RequestBody CreateUptateDTOSubfamily dto,
                                   @PathVariable("id") Long id) {
         return subfamilyService.updateSubfamily(dto, id);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
@@ -72,4 +96,5 @@ public class SubfamilyRestController {
         subfamilyService.delete(s);
         return ResponseEntity.noContent().build();
     }
+
 }
