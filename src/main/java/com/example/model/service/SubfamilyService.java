@@ -24,16 +24,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SubfamilyService extends BaseService<Subfamily, Long, SubfamilyRepository> {
 
-
-
     private final FamilyService familyService;
 
     public List<Subfamily> findAllOrderByName() {
         return this.repositorio.findAll(Sort.by("name"));
     }
 
-    //REST//
+    public List<Subfamily> findByName(String name) {
+        return this.repositorio.findByNameContainsIgnoreCase(name);
+    }
 
+
+    //REST//
     //substituida por findByArgs
     public Page<Subfamily> findByName(String name, Pageable pageable){
         return repositorio.findByNameContainsIgnoreCase(name, pageable);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/web/family")
-public class FamilyController {
+public class FamilyWebController {
 
     @Autowired
     private FamilyService familyService;
@@ -43,7 +43,7 @@ public class FamilyController {
     @PostMapping ("/new/submit")
     public String addSubmit(@ModelAttribute("family") Family f) {
         familyService.save(f);
-        return "redirect:/family/list";
+        return "redirect:/web/family/list";
     }
 
 
@@ -58,7 +58,7 @@ public class FamilyController {
     @PostMapping ("/edit/submit")
     public String editSubmit(@ModelAttribute("family") Family f) {
         familyService.save(f);
-        return "redirect:/family/list";
+        return "redirect:/web/family/list";
     }
 
     @GetMapping("/delete/{id}") // TODO: DeleteMapping?
@@ -67,7 +67,7 @@ public class FamilyController {
         if (family != null)
             familyService.delete(family);
 
-        return "redirect:/family/list";
+        return "redirect:/web/family/list";
     }
 
 

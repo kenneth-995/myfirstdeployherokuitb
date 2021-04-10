@@ -23,7 +23,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <a href="/family/list/orderbyname">Order by name</a>
+        <a href="/web/family/list/orderbyname">Order by name</a>
     </div>
     <div class="col-12">
         <a href="/">Go to Home</a>
@@ -48,8 +48,8 @@
 <!--        <td th:text="${family.getLocalDateTime()}">123456789</td>-->
 
 
-        <td><a th:href="@{/family/edit/{id}(id=${family.id})}">Edit</a> </td>
-        <td><a th:href="@{/family/delete/{id}(id=${family.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/family/edit/{id}(id=${family.id})}">Edit</a> </td>
+        <td><a th:href="@{/web/family/delete/{id}(id=${family.id})}">Delete</a> </td>
     </tr>
     </tbody>
 </table>
@@ -58,7 +58,7 @@
     <div class="form-row mb-4 ">
         <form method="get"
             action="#"
-            th:action="@{/family/list/findbyname}">
+            th:action="@{/web/family/list/findbyname}">
             <input type="text" id="name" placeholder="find by name" class="form-control">
             <div class="form-group text-center" >
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Find</button>

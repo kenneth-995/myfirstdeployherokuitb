@@ -29,8 +29,11 @@
         <form   method="post"
                 action="#"
                 th:object="${subfamilydto}"
-                th:action="${subfamilydto.id!=null}?@{/subfamily/edit/submit}:@{/subfamily/new/submit}">
-<!--                th:action="@{subfamily/edit/submit}">-->
+                th:action="${subfamilydto.id!=null}?@{/web/subfamily/edit/submit}:@{/web/subfamily/new/submit}"
+                >
+
+
+
             <div class="form-group">
                 <label> Id </label>
                 <input contenteditable="${subfamilydto.id!=0}"
@@ -40,6 +43,7 @@
                        th:field="*{id}"
                        th:attrappend="readonly=${subfamilydto.id!=0}?'readonly':null"
                        class="form-control ">
+
             </div>
 
 
@@ -56,7 +60,7 @@
                 <option th:each="family : ${familyList}"
                         th:value="${family.getId()}"
                         th:text="${family.getName()}"
-                        th:selected="${family.getId()}==${familyid}">
+                        th:selected="${family.getId()}==${subfamilydto.getFamilyid()}">
                 </option>
 
             </select>

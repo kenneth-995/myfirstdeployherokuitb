@@ -23,7 +23,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <a href="/subfamily/list/orderbyname">Order by name</a>
+        <a href="/web/subfamily/list/orderbyname">Order by name</a>
     </div>
     <div class="col-12">
         <a href="/">Go to Home</a>
@@ -45,8 +45,8 @@
         <td th:text="${subfamily.id}" scope="row">ID</td>
         <td th:text="${subfamily.name}">Pepe Pérez</td>
         <td th:text="${subfamily.getFamily().getName()}">Pepe Pérez</td>
-        <td><a th:href="@{/subfamily/edit/{id}(id=${subfamily.id})}">Edit</a> </td>
-        <td><a th:href="@{/subfamily/delete/{id}(id=${subfamily.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/subfamily/edit/{id}(id=${subfamily.id})}">Edit</a> </td>
+        <td><a th:href="@{/web/subfamily/delete/{id}(id=${subfamily.id})}">Delete</a> </td>
     </tr>
     </tbody>
 </table>
