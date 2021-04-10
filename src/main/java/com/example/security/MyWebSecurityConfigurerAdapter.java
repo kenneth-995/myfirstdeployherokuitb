@@ -50,6 +50,9 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .antMatchers("/api/subfamily/**").permitAll()
                 .antMatchers("/api/subfamily/list/**").permitAll()
                 .antMatchers("/api/subfamily/new/**").permitAll()
+                .antMatchers("/api/drug/**").permitAll()
+                .antMatchers("/api/drug/list/**").permitAll()
+                .antMatchers("/api/drug/new/**").permitAll()
 
 //                .antMatchers(
 //                        "/empleats/edit/{id}").hasAnyRole("USER", "ADMIN") //"/empleats/list", **.hasAnyRole("USER", "ADMIN")**
