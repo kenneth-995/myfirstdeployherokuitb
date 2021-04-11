@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        Hello, authenticated as <span sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" value="Logout" />
+        </form>
+        <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <a href="/web/drug/">Anar al llistat</a>
+        </div>
+        <div class="col-12">
+            <a href="/">Anar a la pagina principal</a>
+        </div>
+    </div>
+
+    <div class="form-row mb-4 ">
+        <form   method="post"
+                action="#"
+                th:action="${drug.id!=null}?@{/web/drug/edit/submit}:@{/web/drug/new/submit}"
+                th:object="${drug}">
+
+            <h1 th:text="${drug.id!=null}?'Edit drug': 'New drug'"></h1>
+            <div class="form-group">
+                <label> Id </label>
+                <input th:contenteditable="${false}"
+                       type="text"
+                       id="id"
+                       placeholder=""
+                       th:field="*{id}"
+                       th:attrappend="readonly=${drug.id!=0}?'readonly':null"
+                       class="form-control ">
+            </div>
+            <div class="form-group">
+                <label for="name"> Name </label>
+                <input type="text" id="name" placeholder="name" th:field="*{name}" class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <label for="dose"> Dose </label>
+                <input type="text" id="dose" placeholder="name" th:field="*{dose}" class="form-control" name="dose">
+            </div>
+
+            <div class="form-group text-center" >
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -40,16 +40,23 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .antMatchers("/web/family/**").permitAll()
                 .antMatchers("/web/family/list/**").permitAll()
                 .antMatchers("/web/family/new/**").permitAll()
+
                 .antMatchers("/web/subfamily/**").permitAll()
                 .antMatchers("/web/subfamily/list/**").permitAll()
                 .antMatchers("/web/subfamily/new/**").permitAll()
+
+                .antMatchers("/web/drug/**").permitAll()
+                .antMatchers("/web/drug/list/**").permitAll()
+                .antMatchers("/web/drug/new/**").permitAll()
                 //API
                 .antMatchers("/api/family/**").permitAll()
                 .antMatchers("/api/family/list/**").permitAll()
                 .antMatchers("/api/family/new/**").permitAll()
+
                 .antMatchers("/api/subfamily/**").permitAll()
                 .antMatchers("/api/subfamily/list/**").permitAll()
                 .antMatchers("/api/subfamily/new/**").permitAll()
+
                 .antMatchers("/api/drug/**").permitAll()
                 .antMatchers("/api/drug/list/**").permitAll()
                 .antMatchers("/api/drug/new/**").permitAll()

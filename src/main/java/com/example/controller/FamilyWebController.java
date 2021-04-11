@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/web/family")
 public class FamilyWebController {
 
-    @Autowired
-    private FamilyService familyService;
+    private final FamilyService familyService;
 
     @GetMapping("/list")
     public String list(Model model) {
