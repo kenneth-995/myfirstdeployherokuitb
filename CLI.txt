@@ -1,1 +1,3 @@
 heroku access --app=firstdeployherokuitb
+heroku config:get DATABASE_URL -a=myfirstdeployherokuitb
+heroku config -a=myfirstdeployherokuitb
