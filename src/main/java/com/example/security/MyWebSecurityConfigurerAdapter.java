@@ -48,6 +48,10 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .antMatchers("/web/drug/**").permitAll()
                 .antMatchers("/web/drug/list/**").permitAll()
                 .antMatchers("/web/drug/new/**").permitAll()
+
+                .antMatchers("/web/exchange/**").permitAll()
+                .antMatchers("/web/exchange/list/**").permitAll()
+                .antMatchers("/web/exchange/new/**").permitAll()
                 //API
                 .antMatchers("/api/family/**").permitAll()
                 .antMatchers("/api/family/list/**").permitAll()
@@ -60,6 +64,10 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .antMatchers("/api/drug/**").permitAll()
                 .antMatchers("/api/drug/list/**").permitAll()
                 .antMatchers("/api/drug/new/**").permitAll()
+
+                .antMatchers("/api/exchange/**").permitAll()
+                .antMatchers("/api/exchange/list/**").permitAll()
+                .antMatchers("/api/exchange/new/**").permitAll()
 
 //                .antMatchers(
 //                        "/empleats/edit/{id}").hasAnyRole("USER", "ADMIN") //"/empleats/list", **.hasAnyRole("USER", "ADMIN")**

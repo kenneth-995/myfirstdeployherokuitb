@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body class="container">
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit" value="Logout" />
+    </form>
+    <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    No Authenticated </br>
+    <a href="/login">Login</a><br/>
+    <a href="/registre">Registre</a>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a href="/">Go to Home</a>
+<!--        <a href="/web/exchange/orderbyname/">Order by name</a>-->
+    </div>
+    <div class="col-12">
+
+        <a href="/web/exchange/new">Add exchange</a> <br/>
+    </div>
+</div>
+
+<table class="table mt-5">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Current Drug</th>
+        <th scope="col">Current Drug Dose</th>
+        <th scope="col">Alternative Drug</th>
+        <th scope="col">Alternative Drug Dose</th>
+        <th scope="col">Subfamily</th>
+
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exchange : ${exchanges}">
+        <td th:text="${exchange.id}" scope="row"></td>
+        <td th:text="${exchange.getCurrentDrug().getName()}"></td>
+        <td th:text="${exchange.getCurrentDrug().getDose()}"></td>
+        <td th:text="${exchange.getAlternativeDrug().getName()}"></td>
+        <td th:text="${exchange.getAlternativeDrug().getDose()}"></td>
+        <td th:text="${exchange.getSubfamily().getName()}"></td>
+
+
+
+        <td><a th:href="@{/web/exchange/edit/{id}(id=${exchange.id})}">Edit</a> </td>
+        <td><a th:href="@{/web/exchange/delete/{id}(id=${exchange.id})}">Delete</a> </td>
+    </tr>
+    </tbody>
+</table>
+
+
+    <div class="form-row mb-4 ">
+        <form method="get"
+            action="#"
+            th:action="@{/web/exchange/list/findbyname}">
+            <input type="text" id="name" placeholder="find by name" class="form-control">
+            <div class="form-group text-center" >
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Find</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

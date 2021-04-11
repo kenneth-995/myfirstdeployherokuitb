@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        Hello, authenticated as <span sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" value="Logout" />
+        </form>
+        <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <a href="/web/">Anar al llistat</a>
+        </div>
+        <div class="col-12">
+            <a href="/">Anar a la pagina principal</a>
+        </div>
+    </div>
+
+    <div class="form-row mb-4 ">
+        <form method="post"
+              action="#"
+              th:object="${exchangedto}"
+              th:action="${exchangedto.id!=null}?@{/web/exchange/edit/submit}:@{/web/exchange/new/submit}">
+
+            <div class="form-group">
+                <label> Id </label>
+                <input th:contenteditable="${exchangedto.id!=0}"
+                       type="text"
+                       id="id"
+                       placeholder=""
+                       th:field="*{id}"
+                       th:attrappend="readonly=${exchangedto.id!=0}?'readonly':null"
+                       class="form-control ">
+            </div>
+
+            <div class="form-group">
+                <label> Current Drug </label><br/>
+                <select th:field="*{currentId}" class="form-select">
+                    <option th:each="drug : ${drugs}"
+                            th:value="${drug.getId()}"
+                            th:text="${drug.getName()}"
+                            th:selected="${drug.getId()}==${exchangedto.currentId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label> Alternative Drug </label><br/>
+                <select th:field="*{alternativeId}" class="form-select">
+
+                    <option th:each="drug : ${drugs}"
+                            th:value="${drug.getId()}"
+                            th:text="${drug.getName()}"
+                            th:selected="${drug.getId()}==${exchangedto.alternativeId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label> Subfamily </label><br/>
+                <select th:field="*{subfamilyId}" class="form-select">
+                    <option th:each="subfamily : ${subfamilies}"
+                            th:value="${subfamily.getId()}"
+                            th:text="${subfamily.getName()}"
+                            th:selected="${subfamily.getId()}==${exchangedto.subfamilyId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group text-center" >
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
