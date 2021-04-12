@@ -1,5 +1,6 @@
 package com.example.controllerrest;
 
+import com.example.error.drug.DrugNotFoundException;
 import com.example.error.subfamily.SubfamilyNotFoundException;
 import com.example.model.dto.converter.DrugDTOConverter;
 import com.example.model.dto.drug.CreateUpdateDTODrug;
@@ -37,7 +38,7 @@ public class DrugRestController {
                                            @RequestParam("dose")Optional<String> dose) {
         Page<Drug> result = drugService.findByArgs(name, dose, pageable);
         if (result.isEmpty())
-            throw new SubfamilyNotFoundException();
+            throw new DrugNotFoundException();
         else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
@@ -50,7 +51,7 @@ public class DrugRestController {
 
     @GetMapping("/{id}")
     public Drug getOne(@PathVariable("id") Long id) {
-        return drugService.findById(id).orElseThrow(() -> new SubfamilyNotFoundException(id));
+        return drugService.findById(id).orElseThrow(() -> new DrugNotFoundException(id));
     }
 
     @PostMapping("/")

@@ -1,5 +1,6 @@
 package com.example.model.service;
 
+import com.example.error.exchange.ExchangeNotFoundException;
 import com.example.error.subfamily.SubfamilyNotFoundException;
 import com.example.model.dto.exchange.CreateExchangeDTO;
 import com.example.model.dto.exchange.CreateUpdateExcangeDTOWeb;
@@ -59,7 +60,7 @@ public class ExchangeService extends BaseService<Exchange, Long, ExchangeReposit
         Drug current = drugService.findById(dto.getCurrentId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getCurrentId()));
         Drug alternative = drugService.findById(dto.getAlternativeId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getAlternativeId()));
         Subfamily subfamily = subfamilyService.findById(dto.getSubfamilyId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getSubfamilyId()));
-        Exchange e = this.repositorio.findById(id).orElseThrow(()-> new SubfamilyNotFoundException(dto.getSubfamilyId()));
+        Exchange e = this.repositorio.findById(id).orElseThrow(()-> new ExchangeNotFoundException(id));
         e.setCurrentDrug(current);
         e.setAlternativeDrug(alternative);
         e.setSubfamily(subfamily);

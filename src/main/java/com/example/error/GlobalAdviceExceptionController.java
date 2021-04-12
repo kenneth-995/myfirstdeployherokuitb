@@ -3,6 +3,8 @@ package com.example.error;
 import com.example.error.Family.FamilyConstraintViolationException;
 import com.example.error.Family.FamilyInsertNameNotFoundException;
 import com.example.error.Family.FamilyNotFoundException;
+import com.example.error.drug.DrugNotFoundException;
+import com.example.error.exchange.ExchangeNotFoundException;
 import com.example.error.subfamily.SubfamilyNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,4 +38,17 @@ public class GlobalAdviceExceptionController extends ResponseEntityExceptionHand
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
+
+    @ExceptionHandler(DrugNotFoundException.class)
+    public ResponseEntity<ApiError> handleDrugNotFound(DrugNotFoundException ex) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+
+    @ExceptionHandler(ExchangeNotFoundException.class)
+    public ResponseEntity<ApiError> handleExchangeNotFound(ExchangeNotFoundException ex) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+
 }

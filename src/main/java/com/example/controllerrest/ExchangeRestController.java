@@ -1,5 +1,6 @@
 package com.example.controllerrest;
 
+import com.example.error.exchange.ExchangeNotFoundException;
 import com.example.error.subfamily.SubfamilyNotFoundException;
 import com.example.model.dto.exchange.CreateExchangeDTO;
 import com.example.model.dto.subfamily.CreateUptateDTOSubfamily;
@@ -33,7 +34,7 @@ public class ExchangeRestController {
                                     HttpServletRequest request) {
         Page<Exchange> result = exchangeService.findAll(pageable);
         if (result.isEmpty())
-            throw new SubfamilyNotFoundException();
+            throw new ExchangeNotFoundException();
         else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
@@ -45,7 +46,7 @@ public class ExchangeRestController {
 
     @GetMapping("/{id}")
     public Exchange getOne(@PathVariable("id") Long id){
-        return exchangeService.findById(id).orElseThrow(() ->new SubfamilyNotFoundException(id));
+        return exchangeService.findById(id).orElseThrow(() ->new ExchangeNotFoundException(id));
 
     }
 
@@ -56,7 +57,7 @@ public class ExchangeRestController {
                                            HttpServletRequest request) {
         Page<Exchange> result = exchangeService.findBySubfamilyId(id, pageable);
         if (result.isEmpty())
-            throw new SubfamilyNotFoundException();
+            throw new ExchangeNotFoundException();
         else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
@@ -72,7 +73,7 @@ public class ExchangeRestController {
                                               HttpServletRequest request) {
         Page<Exchange> result = exchangeService.findBySubfamilyNameQuery(name, pageable);
         if (result.isEmpty())
-            throw new SubfamilyNotFoundException();
+            throw new ExchangeNotFoundException();
         else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
@@ -89,7 +90,7 @@ public class ExchangeRestController {
                                                  HttpServletRequest request) {
         Page<Exchange> result = exchangeService.findByCurrentDrugId(id, pageable);
         if (result.isEmpty())
-            throw new SubfamilyNotFoundException();
+            throw new ExchangeNotFoundException();
         else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
             return ResponseEntity.ok().header(
