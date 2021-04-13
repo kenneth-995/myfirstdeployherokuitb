@@ -28,10 +28,11 @@
     </div>
 </div>
 
-<table class="table mt-5">
+<div class="mt-5 text-center"><h3>Fármacos</h3></div>
+<table class="table">
     <thead>
-    <tr>
-        <th scope="col">#</th>
+    <tr class="text-center">
+        <th scope="col" class="d-none">#</th>
         <th scope="col">Name</th>
         <th scope="col">Dose</th>
         <th scope="col">Edit</th>
@@ -39,8 +40,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="drug : ${drugs}">
-        <td th:text="${drug.id}" scope="row"></td>
+    <tr th:each="drug : ${drugs}" class="text-center">
+        <td th:text="${drug.id}" scope="row" class="d-none"></td>
         <td th:text="${drug.name}"></td>
         <td th:text="${drug.getDose()}"></td>
         <td><a th:href="@{/web/drug/edit/{id}(id=${drug.id})}" class="btn btn-warning">Edit</a> </td>

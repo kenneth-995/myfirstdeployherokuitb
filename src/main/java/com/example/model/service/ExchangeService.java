@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -81,6 +82,29 @@ public class ExchangeService extends BaseService<Exchange, Long, ExchangeReposit
         e.setAlternativeDrug(alternative);
         e.setSubfamily(subfamily);
         return this.repositorio.save(e);
+    }
+
+    public Exchange updateWeb(CreateUpdateExcangeDTOWeb dto) {
+        Drug current = drugService.findById(dto.getCurrentId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getCurrentId()));
+        Drug alternative = drugService.findById(dto.getAlternativeId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getAlternativeId()));
+        Subfamily subfamily = subfamilyService.findById(dto.getSubfamilyId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getSubfamilyId()));
+        Exchange e = this.repositorio.findById(dto.getId()).orElseThrow(()-> new ExchangeNotFoundException(dto.getId()));
+        e.setCurrentDrug(current);
+        e.setAlternativeDrug(alternative);
+        e.setSubfamily(subfamily);
+        return this.repositorio.save(e);
+    }
+
+    public List<Exchange> findByCurrentNameWeb(String name) {
+        List<Exchange> list = this.repositorio.findAll();
+
+        List<Exchange> filteredList = new ArrayList<>();
+
+        list.forEach(exchange -> {
+            if (exchange.getCurrentDrug().getName().contains(name))
+                filteredList.add(exchange);
+        });
+        return filteredList;
     }
 
 

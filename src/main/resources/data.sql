@@ -1,13 +1,13 @@
 
-insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'ESTOMALÒGICS', '2021-04-02 09:24:22.998597');
-insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'ANTIÀCIDS', '2021-04-02 09:24:22.998597');
-insert into Family (id, name,  local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'ANTIULCEROSOS', '2021-04-02 09:24:22.998597');
-insert into Family (id, name,  local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'ANTIESPASMÒDICS', '2021-04-02 09:24:22.998597');
+insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Estomatològics', '2021-04-02 09:24:22.998597');
+insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Antiàcids', '2021-04-02 09:24:22.998597');
+insert into Family (id, name,  local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Antiulcerosos', '2021-04-02 09:24:22.998597');
+insert into Family (id, name,  local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Antiespasmòdics', '2021-04-02 09:24:22.998597');
 
-insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'PREPARATS PER A LA PROFILÀXIS DE LA CÀRIES', 1);
-insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'ANTIINFECCIOSOS I ANTISÈPTICS PER TRACTAMENT ORAL LOCAL', 1);
-insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'CORTICOIDS PER TRACTAMENT ORAL LOCAL', 1);
-insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'ALTRES FÀRMACS', 1);
+insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'Preparats per a la profilàxis de la càries', 1);
+insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'Antiinfecciosos i antisèptics per tractament oral', 1);
+insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'Corticoids per tractament oral local', 1);
+insert into Subfamily (id, name, familyid) values (NEXTVAL('hibernate_sequence'), 'Altres fàrmacs', 1);
 
 insert into Drug (id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Fluoruro sòdico Fluor Kin 0,25 mg (ió Fluor) comp','Segons edat i contingut de Fluor en aigua de beguda');
 insert into Drug (id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Fluoruro sòdico Fluor Lacer 1mg (ió Fluor) comp)','Segons edat i contingut de Fluor en aigua de beguda');

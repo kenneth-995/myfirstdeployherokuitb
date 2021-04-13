@@ -29,6 +29,9 @@ public class ExchangeWebController {
     @GetMapping("/")
     public String toList(Model model) {
         model.addAttribute("exchanges", exchangeService.findAll());
+
+        model.addAttribute("namecurrent", "");
+        model.addAttribute("namealternative", "");
         return "listexchange";
     }
 
@@ -62,8 +65,7 @@ public class ExchangeWebController {
 
     @PostMapping ("/edit/submit")
     public String editSubmit(@ModelAttribute("exchangedto") CreateUpdateExcangeDTOWeb dtoWeb) {
-        Exchange exchange = exchangeDTOConverter.convertDtoToEntityWeb(dtoWeb);
-        exchangeService.save(exchange);
+        exchangeService.updateWeb(dtoWeb);
         return "redirect:/web/exchange/";
     }
 
@@ -74,6 +76,27 @@ public class ExchangeWebController {
             exchangeService.delete(exchange);
 
         return "redirect:/web/exchange/";
+    }
+
+    @PostMapping("/findbycurrentname")
+    public String findByCurrentName(Model model,
+                                    @ModelAttribute("namecurrent") String name){
+        System.out.println("Recived name current = " + name);
+
+        model.addAttribute("exchanges", exchangeService.findByCurrentNameWeb(name));
+
+        return "listexchange";
+    }
+
+    //TODO: find by alternative
+    @PostMapping("/findbyalternativename")
+    public String findByAlternativeName(Model model,
+                                    @ModelAttribute("namealternative") String name){
+        System.out.println("Recived name alternative = " + name);
+
+        model.addAttribute("exchanges", exchangeService.findByCurrentNameWeb(name));
+
+        return "listexchange";
     }
 
 }

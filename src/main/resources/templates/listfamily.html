@@ -29,10 +29,12 @@
     </div>
 </div>
 
-<table class="table mt-5">
+<div class="mt-5 mb-4 text-center"><h3>Familias de patologías</h3></div>
+
+<table class="table">
     <thead>
-    <tr>
-        <th scope="col">#</th>
+    <tr class="text-center">
+        <th scope="col" class="d-none">#</th>
         <th scope="col">Name</th>
 <!--        <th scope="col">Date Created</th>-->
 
@@ -41,13 +43,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="family : ${familyList}">
-        <td th:text="${family.id}" scope="row"></td>
+    <tr th:each="family : ${familyList}" class="text-center">
+        <td th:text="${family.id}" class="d-none"></td>
         <td th:text="${family.name}"></td>
 <!--        <td th:text="${family.getLocalDateTime()}">123456789</td>-->
 
 
-        <td><a th:href="@{/web/family/edit/{id}(id=${family.id})}" class="btn btn-warning">Edit</a> </td>
+        <td><a th:href="@{/web/family/edit/{id}(id=${family.id})}" class="btn btn-warning text-center">Edit</a> </td>
         <td><a th:href="@{/web/family/delete/{id}(id=${family.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
     </tbody>

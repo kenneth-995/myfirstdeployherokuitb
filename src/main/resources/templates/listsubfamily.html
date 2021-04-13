@@ -29,10 +29,11 @@
     </div>
 </div>
 
-<table class="table mt-5">
+<div class="mt-5 mb-4 text-center"><h3>Subfamilias de patologías</h3></div>
+<table class="table">
     <thead>
-    <tr>
-        <th scope="col">#</th>
+    <tr class="text-center">
+        <th scope="col" class="d-none">#</th>
         <th scope="col">Name</th>
         <th scope="col">Family name</th>
         <th scope="col">Edit</th>
@@ -40,10 +41,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="subfamily : ${subfamilyList}">
-        <td th:text="${subfamily.id}" scope="row">ID</td>
-        <td th:text="${subfamily.name}">Pepe Pérez</td>
-        <td th:text="${subfamily.getFamily().getName()}">Pepe Pérez</td>
+    <tr th:each="subfamily : ${subfamilyList}" class="text-center">
+        <td th:text="${subfamily.id}" scope="row" class="d-none">ID</td>
+        <td th:text="${subfamily.name}" class="text-left"></td>
+        <td th:text="${subfamily.getFamily().getName()}"></td>
         <td><a th:href="@{/web/subfamily/edit/{id}(id=${subfamily.id})}" class="btn btn-warning">Edit</a> </td>
         <td><a th:href="@{/web/subfamily/delete/{id}(id=${subfamily.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
