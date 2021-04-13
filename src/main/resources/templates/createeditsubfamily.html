@@ -18,54 +18,54 @@
 
     <div class="row">
         <div class="col-12">
-            <a href="/empleats/list">Anar al llistat</a>
+            <a href="/web/subfamily/list">Lista subfamilias</a>
         </div>
         <div class="col-12">
-            <a href="/">Anar a la pagina principal</a>
+            <a href="/">Ir a la pagina principal</a>
         </div>
     </div>
 
-    <div class="form-row mb-4 ">
-        <form   method="post"
-                action="#"
-                th:object="${subfamilydto}"
-                th:action="${subfamilydto.id!=null}?@{/web/subfamily/edit/submit}:@{/web/subfamily/new/submit}"
-                >
+    <div>
+        <form  method="post"
+               action="#"
+               th:object="${subfamilydto}"
+               th:action="${subfamilydto.id!=null}?@{/web/subfamily/edit/submit}:@{/web/subfamily/new/submit}">
 
-
-
+            <h3 class="mt-3" th:text="${subfamilydto.id!=null}?@{Editar subfamilia}:@{Crear subfamilia}"></h3>
             <div class="form-group">
-                <label> Id </label>
-                <input contenteditable="${subfamilydto.id!=0}"
+<!--                <label> Id </label>-->
+                <input th:contenteditable="${false}"
                        type="text"
                        id="id"
                        placeholder=""
                        th:field="*{id}"
                        th:attrappend="readonly=${subfamilydto.id!=0}?'readonly':null"
-                       class="form-control ">
-
+                       class="form-control d-none">
             </div>
 
 
             <div class="form-group">
-                <label> Name </label>
-                <input type="text" id="name" placeholder="name" th:field="*{name}" class="form-control">
+                <label for="name"> Name </label>
+                <input th:field="*{name}"
+                       id="name"
+                       type="text"
+                       placeholder="name"
+                       class="form-control input-lg">
             </div>
 
 
 
-            <label> Family </label>
-            <select th:field="*{familyid}" class="form-select">
-
+            <label> Family </label> <br/>
+            <select th:field="*{familyid}" class="form-select input-lg">
                 <option th:each="family : ${familyList}"
                         th:value="${family.getId()}"
                         th:text="${family.getName()}"
-                        th:selected="${family.getId()}==${subfamilydto.getFamilyid()}">
+                        th:selected="${family.getId()}==${subfamilydto.getFamilyid()}"
+                        class="form-select input-lg">
                 </option>
-
             </select>
 
-            <div class="form-group text-center" >
+            <div class="form-group text-center" ><br/>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Enviar</button>
             </div>
         </form>

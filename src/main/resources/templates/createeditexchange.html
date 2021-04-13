@@ -18,44 +18,51 @@
 
     <div class="row">
         <div class="col-12">
-            <a href="/web/">Anar al llistat</a>
+            <a href="/web/exchange/">Lista Intercambios</a>
         </div>
         <div class="col-12">
-            <a href="/">Anar a la pagina principal</a>
+            <a href="/">Ir a la pagina principal</a>
         </div>
     </div>
 
-    <div class="form-row mb-4 ">
+    <div class="">
+
         <form method="post"
               action="#"
               th:object="${exchangedto}"
               th:action="${exchangedto.id!=null}?@{/web/exchange/edit/submit}:@{/web/exchange/new/submit}">
 
+            <h3 class="mt-3" th:text="${exchangedto.id!=null}?@{Editar intercambio terapéutico}:@{Crear intercambio terapéutico}"></h3>
             <div class="form-group">
-                <label> Id </label>
-                <input th:contenteditable="${exchangedto.id!=0}"
+<!--                <label> Id </label>-->
+                <input th:contenteditable="${false}"
                        type="text"
                        id="id"
                        placeholder=""
                        th:field="*{id}"
                        th:attrappend="readonly=${exchangedto.id!=0}?'readonly':null"
-                       class="form-control ">
+                       class="form-control d-none">
             </div>
 
             <div class="form-group">
                 <label> Current Drug </label><br/>
-                <select th:field="*{currentId}" class="form-select">
+
+                <select th:field="*{currentId}" class="form-select" aria-label="Default select example">
+                    <option th:value="0" th:selected="${exchangedto.id!=null}?@{true}:@{false}"> Selecciona un fármaco actual</option>
+
                     <option th:each="drug : ${drugs}"
                             th:value="${drug.getId()}"
                             th:text="${drug.getName()}"
                             th:selected="${drug.getId()}==${exchangedto.currentId}">
                     </option>
                 </select>
+
             </div>
 
             <div class="form-group">
                 <label> Alternative Drug </label><br/>
-                <select th:field="*{alternativeId}" class="form-select">
+                <select th:field="*{alternativeId}" class="form-select form-select-lg mb-3">
+                    <option th:value="0" th:selected="${exchangedto.id!=null}?@{true}:@{false}"> Selecciona un fármaco alternativo</option>
 
                     <option th:each="drug : ${drugs}"
                             th:value="${drug.getId()}"
@@ -68,6 +75,8 @@
             <div class="form-group">
                 <label> Subfamily </label><br/>
                 <select th:field="*{subfamilyId}" class="form-select">
+                    <option th:value="0" th:selected="${exchangedto.id!=null}?@{true}:@{false}"> Selecciona una subfamília</option>
+
                     <option th:each="subfamily : ${subfamilies}"
                             th:value="${subfamily.getId()}"
                             th:text="${subfamily.getName()}"

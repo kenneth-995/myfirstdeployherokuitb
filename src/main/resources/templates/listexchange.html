@@ -18,17 +18,13 @@
 
 <div sec:authorize="!isAuthenticated()">
     No Authenticated </br>
-    <a href="/login">Login</a><br/>
-    <a href="/registre">Registre</a>
-</div>
+    <a href="/login" class="btn btn-outline-primary mt-1">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/registre" class="btn btn-outline-primary mt-1">Registre</a>
+</div></br>
 <div class="row">
     <div class="col-12">
-        <a href="/">Go to Home</a>
-<!--        <a href="/web/exchange/orderbyname/">Order by name</a>-->
-    </div>
-    <div class="col-12">
-
-        <a href="/web/exchange/new">Add exchange</a> <br/>
+        <a href="/" class="btn btn-primary">Go to Home</a>
+        <a href="/web/exchange/new" class="btn btn-primary">Add exchange</a>
     </div>
 </div>
 
@@ -57,8 +53,8 @@
 
 
 
-        <td><a th:href="@{/web/exchange/edit/{id}(id=${exchange.id})}">Edit</a> </td>
-        <td><a th:href="@{/web/exchange/delete/{id}(id=${exchange.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/exchange/edit/{id}(id=${exchange.id})}" class="btn btn-warning">Edit</a> </td>
+        <td><a th:href="@{/web/exchange/delete/{id}(id=${exchange.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
     </tbody>
 </table>

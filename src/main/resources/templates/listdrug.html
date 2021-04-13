@@ -18,15 +18,13 @@
 
 <div sec:authorize="!isAuthenticated()">
     No Authenticated </br>
-    <a href="/login">Login</a><br/>
-    <a href="/registre">Registre</a>
-</div>
+    <a href="/login" class="btn btn-outline-primary mt-1">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/registre" class="btn btn-outline-primary mt-1">Registre</a>
+</div></br>
 <div class="row">
     <div class="col-12">
-        <a href="/web/drug/orderbyname">Order by name</a>
-    </div>
-    <div class="col-12">
-        <a href="/">Go to Home</a>
+        <a href="/web/drug/orderbyname" class="btn btn-primary">Order by name</a> &nbsp;&nbsp;&nbsp;
+        <a href="/" class="btn btn-primary">Go to Home</a>
     </div>
 </div>
 
@@ -45,8 +43,8 @@
         <td th:text="${drug.id}" scope="row"></td>
         <td th:text="${drug.name}"></td>
         <td th:text="${drug.getDose()}"></td>
-        <td><a th:href="@{/web/drug/edit/{id}(id=${drug.id})}">Edit</a> </td>
-        <td><a th:href="@{/web/drug/delete/{id}(id=${drug.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/drug/edit/{id}(id=${drug.id})}" class="btn btn-warning">Edit</a> </td>
+        <td><a th:href="@{/web/drug/delete/{id}(id=${drug.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
     </tbody>
 </table>

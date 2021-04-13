@@ -100,6 +100,22 @@ public class ExchangeRestController {
         }
     }
 
+    @GetMapping("/alternative/{id}")
+    public ResponseEntity<?> getByAlternativeDrugId (@PageableDefault Pageable pageable,
+                                                 @PathVariable("id") Long id,
+                                                 HttpServletRequest request) {
+        Page<Exchange> result = exchangeService.findByAlternativeDrugId(id, pageable);
+        if (result.isEmpty())
+            throw new ExchangeNotFoundException();
+        else {
+            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
+            return ResponseEntity.ok().header(
+                    "link",
+                    paginationLinksUtil.createLinkHeader(result, uriBuilder))
+                    .body(result);
+        }
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody CreateExchangeDTO dto) {
         return ResponseEntity.ok().body(exchangeService.create(dto));
@@ -113,7 +129,7 @@ public class ExchangeRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        Exchange e = exchangeService.findById(id).orElseThrow(() -> new SubfamilyNotFoundException(id));
+        Exchange e = exchangeService.findById(id).orElseThrow(() -> new ExchangeNotFoundException(id));
         exchangeService.delete(e);
         return ResponseEntity.noContent().build();
     }

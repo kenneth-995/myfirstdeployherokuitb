@@ -18,15 +18,14 @@
 
 <div sec:authorize="!isAuthenticated()">
     No Authenticated </br>
-    <a href="/login">Login</a><br/>
-    <a href="/registre">Registre</a>
-</div>
+    <a href="/login" class="btn btn-outline-primary mt-1">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/registre" class="btn btn-outline-primary mt-1">Registre</a>
+</div></br>
 <div class="row">
     <div class="col-12">
-        <a href="/web/subfamily/list/orderbyname">Order by name</a>
-    </div>
-    <div class="col-12">
-        <a href="/">Go to Home</a>
+        <a href="/" class="btn btn-primary">Ir a la página principal</a>&nbsp;&nbsp;&nbsp;
+        <a href="/web/subfamily/list/orderbyname" class="btn btn-primary" >Ordenar por nombre</a>&nbsp;&nbsp;&nbsp;
+        <a href="/web/subfamily/new/" class="btn btn-primary" >Crear</a>
     </div>
 </div>
 
@@ -45,8 +44,8 @@
         <td th:text="${subfamily.id}" scope="row">ID</td>
         <td th:text="${subfamily.name}">Pepe Pérez</td>
         <td th:text="${subfamily.getFamily().getName()}">Pepe Pérez</td>
-        <td><a th:href="@{/web/subfamily/edit/{id}(id=${subfamily.id})}">Edit</a> </td>
-        <td><a th:href="@{/web/subfamily/delete/{id}(id=${subfamily.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/subfamily/edit/{id}(id=${subfamily.id})}" class="btn btn-warning">Edit</a> </td>
+        <td><a th:href="@{/web/subfamily/delete/{id}(id=${subfamily.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
     </tbody>
 </table>

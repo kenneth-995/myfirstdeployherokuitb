@@ -45,6 +45,10 @@ public class ExchangeService extends BaseService<Exchange, Long, ExchangeReposit
         return this.repositorio.findByCurrentDrug_Id(id, pageable);
     }
 
+    public Page<Exchange> findByAlternativeDrugId(Long id, Pageable pageable) {
+        return this.repositorio.findByAlternativeDrug_Id(id, pageable);
+    }
+
     public Exchange create(CreateExchangeDTO dto) {
         Drug current = drugService.findById(dto.getCurrentId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getCurrentId()));
         Drug alternative = drugService.findById(dto.getAlternativeId()).orElseThrow(()-> new SubfamilyNotFoundException(dto.getAlternativeId()));

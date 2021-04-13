@@ -18,15 +18,14 @@
 
 <div sec:authorize="!isAuthenticated()">
     No Authenticated </br>
-    <a href="/login">Login</a><br/>
-    <a href="/registre">Registre</a>
-</div>
+    <a href="/login" class="btn btn-outline-primary mt-1">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/registre" class="btn btn-outline-primary mt-1">Registre</a>
+</div></br>
 <div class="row">
     <div class="col-12">
-        <a href="/web/family/list/orderbyname">Order by name</a>
-    </div>
-    <div class="col-12">
-        <a href="/">Go to Home</a>
+        <a href="/" class="btn btn-primary">Ir a la página principal</a>&nbsp;&nbsp;&nbsp;
+        <a href="/web/family/list/orderbyname" class="btn btn-primary" >Ordenar por nombre</a>&nbsp;&nbsp;&nbsp;
+        <a href="/web/family/new/" class="btn btn-primary" >Crear</a>
     </div>
 </div>
 
@@ -48,8 +47,8 @@
 <!--        <td th:text="${family.getLocalDateTime()}">123456789</td>-->
 
 
-        <td><a th:href="@{/web/family/edit/{id}(id=${family.id})}">Edit</a> </td>
-        <td><a th:href="@{/web/family/delete/{id}(id=${family.id})}">Delete</a> </td>
+        <td><a th:href="@{/web/family/edit/{id}(id=${family.id})}" class="btn btn-warning">Edit</a> </td>
+        <td><a th:href="@{/web/family/delete/{id}(id=${family.id})}" class="btn btn-danger">Delete</a> </td>
     </tr>
     </tbody>
 </table>
