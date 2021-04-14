@@ -35,7 +35,7 @@ public class UsuarioService extends BaseService<Usuario, String, UsuarioReposito
 
     @PostConstruct
     public void init() {
-        usuarioRepository.save(new Usuario("kenneth", passwordEncoder().encode("kenneth"), "ADMIN"));
-        usuarioRepository.save(new Usuario("user1", passwordEncoder().encode("user1"), "USER"));
+        //usuarioRepository.save(new Usuario("kenneth", passwordEncoder().encode("kenneth"), "ADMIN"));
+        //usuarioRepository.save(new Usuario("user", passwordEncoder().encode("user"), "USER"));
     }
 }

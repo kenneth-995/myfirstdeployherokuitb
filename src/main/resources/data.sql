@@ -1,3 +1,5 @@
+insert into Usuario(username, password, role) values ('kenneth', '$2a$10$0aBG0gwHAgt7I3fNqLchG.fVgM.pM05aXV9tDIPX7knfof.nffy4e', 'ADMIN');
+insert into Usuario(username, password, role) values ('user', '$2a$10$DcPTP/W9MyV3u113VChZYuDAy6gYaeTji04BMA19642GGfzlRXxUm', 'USER');
 
 insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Estomatològics', '2021-04-02 09:24:22.998597');
 insert into Family (id, name, local_Date_Time) values (NEXTVAL('hibernate_sequence'), 'Antiàcids', '2021-04-02 09:24:22.998597');
