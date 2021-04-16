@@ -32,6 +32,7 @@ public class ExchangeWebController {
 
         model.addAttribute("namecurrent", "");
         model.addAttribute("namealternative", "");
+        model.addAttribute("namesubfamily", "");
         return "listexchange";
     }
 
@@ -88,13 +89,21 @@ public class ExchangeWebController {
         return "listexchange";
     }
 
-    //TODO: find by alternative
     @PostMapping("/findbyalternativename")
     public String findByAlternativeName(Model model,
-                                    @ModelAttribute("namealternative") String name){
+                                        @ModelAttribute("namealternative") String name){
         System.out.println("Recived name alternative = " + name);
 
-        model.addAttribute("exchanges", exchangeService.findByCurrentNameWeb(name));
+        model.addAttribute("exchanges", exchangeService.findByAlternativeNameWeb(name));
+
+        return "listexchange";
+    }
+
+    @PostMapping("/findbysubfamilyname")
+    public String findBySubfamilyName(Model model,
+                                      @ModelAttribute("namesubfamily") String name){
+
+        model.addAttribute("exchanges", exchangeService.findBySubfamilyNameWeb(name));
 
         return "listexchange";
     }

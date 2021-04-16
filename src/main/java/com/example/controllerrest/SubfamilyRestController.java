@@ -32,7 +32,7 @@ public class SubfamilyRestController {
 
     private final PaginationLinksUtil paginationLinksUtil;
 
-    @GetMapping("/") //el parametro familyid no funciona por las specifications!
+    @GetMapping("/") //TODO: el parametro familyid no funciona en las specifications al sertener objeto anidado
     public ResponseEntity<?> getAllWithArgs(@PageableDefault(size = 10, page = 0) Pageable pageable,
                                             HttpServletRequest request,
                                             @RequestParam("name") Optional<String> name,
@@ -58,8 +58,8 @@ public class SubfamilyRestController {
 
     @GetMapping("/family/{id}")
     public ResponseEntity<?> getSubfamilyByFamilyId(@PageableDefault(size = 10, page = 0) Pageable pageable,
-                                       HttpServletRequest request,
-                                       @PathVariable("id") Long id) {
+                                                    @PathVariable("id") Long id,
+                                                    HttpServletRequest request){
         Page<Subfamily> result = subfamilyService.findByFamilyId(id, pageable);
 
         if (result.isEmpty())

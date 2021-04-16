@@ -12,9 +12,9 @@ import com.example.model.service.base.BaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,14 +97,56 @@ public class ExchangeService extends BaseService<Exchange, Long, ExchangeReposit
 
     public List<Exchange> findByCurrentNameWeb(String name) {
         List<Exchange> list = this.repositorio.findAll();
-
         List<Exchange> filteredList = new ArrayList<>();
 
+        String nameClean = cleanAccentsAndWhiteSpaces(name.replaceAll("\\s",""));
+
         list.forEach(exchange -> {
-            if (exchange.getCurrentDrug().getName().contains(name))
+            String cleanCurrentName = cleanAccentsAndWhiteSpaces(exchange.getCurrentDrug().getName().replaceAll("\\s",""));
+            if (cleanCurrentName.contains(nameClean))
                 filteredList.add(exchange);
         });
         return filteredList;
+    }
+
+    public List<Exchange> findByAlternativeNameWeb(String name) {
+        List<Exchange> list = this.repositorio.findAll();
+        List<Exchange> filteredList = new ArrayList<>();
+        String nameClean = cleanAccentsAndWhiteSpaces(name);
+
+        list.forEach(exchange -> {
+            String cleanCurrentName = cleanAccentsAndWhiteSpaces(exchange.getAlternativeDrug().getName());
+            if (cleanCurrentName.replace(" ", "").contains(nameClean.replace(" ", "")))
+                filteredList.add(exchange);
+        });
+
+        return filteredList;
+    }
+
+    // TODO AÑADIR EL FORM CON INPUT SUBFAMILY NAME
+    public List<Exchange> findBySubfamilyNameWeb(String name) {
+        List<Exchange> list = this.repositorio.findAll();
+        List<Exchange> filteredList = new ArrayList<>();
+        System.out.println("findBySubfamilyNameWeb");
+        String nameClean = cleanAccentsAndWhiteSpaces(name);
+
+        list.forEach(exchange -> {
+            String cleanCurrentName = cleanAccentsAndWhiteSpaces(exchange.getSubfamily().getName());
+            if (cleanCurrentName.contains(nameClean))
+                filteredList.add(exchange);
+
+        });
+
+        return filteredList;
+    }
+
+
+
+    public String cleanAccentsAndWhiteSpaces(String param) {
+        String lowerParam = param.toLowerCase();
+        // \\s equivale a cualquier tipo de carácter "blanco", espacios, tabuladores y retornos.
+        String cadenaNormalize = Normalizer.normalize(lowerParam.replaceAll("\\s",""), Normalizer.Form.NFD);
+        return cadenaNormalize.replaceAll("[^\\p{ASCII}]", "");
     }
 
 
