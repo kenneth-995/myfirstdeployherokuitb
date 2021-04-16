@@ -33,7 +33,7 @@ public class Exchange {
     private Subfamily subfamily;
 
     /**
-     * Métodos helper
+     * Méttodos helper
      */
 //    public void addIntercambio(Intercambio intercambio) {
 //        this.pathologicalSubfamily.addIntercambio(intercambio);

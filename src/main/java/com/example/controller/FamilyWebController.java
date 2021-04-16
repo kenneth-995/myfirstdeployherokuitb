@@ -60,7 +60,7 @@ public class FamilyWebController {
         return "redirect:/web/family/list";
     }
 
-    @GetMapping("/delete/{id}") // TODO: DeleteMapping?
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id")Long id){
         Family family = familyService.findById(id).orElse(null);
         if (family != null)
