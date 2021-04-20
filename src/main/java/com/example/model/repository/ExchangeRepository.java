@@ -22,11 +22,13 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Long>,
 
     Page<Exchange> findBySubfamily_Name(String name, Pageable pageable);
 
-    //TODO buscar los exchange con e.subfamilyid.name = name, la funcion de arriba findBySubfamily_Name no busca bien
+    //TODO findBySubfamily_Name() no busca bien
     @Query(value =
-            "SELECT e.id, e.currentdrugid, e.alternativedrugid, e.subfamilyid from exchange e where e.currentdrugid = 9"
-            //"SELECT e.id, e.currentdrugid, e.alternativedrugid, e.subfamilyid from exchange e where e.currentdrugid.name = 'a'"
+            //"SELECT e FROM exchange ex JOIN ex.subfamilyid sf JOIN sf.name WHERE sf.name = %a%"
+            //"SELECT e FROM exchange e INNER JOIN subfamily s ON e.subfamilyid = s.id WHERE s.name LIKE '%a%' ORDER BY s.name ASC;"
+            "SELECT e.id, e.currentdrugid, e.alternativedrugid, e.subfamilyid from exchange e where e.currentdrugid = 12"
             , nativeQuery = true)
+
     Page<Exchange> findBySubfamilyNameQuery(@Param("name")String name, Pageable pageable);
 
 

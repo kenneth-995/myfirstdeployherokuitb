@@ -84,20 +84,20 @@
 <div class="mt-3 mb-4 text-center"><h3>Intercambios terapéuticos</h3></div>
 <table class="table">
     <thead>
-    <tr class="text-center">
+    <tr class="text-center border border-dark">
 <!--        <th scope="col" class="d-none">#</th>-->
-        <th scope="col">Fora guia</th> <!--Current-->
-        <th scope="col">Dosis</th>
-        <th scope="col">Substituir per</th><!--Alternative-->
-        <th scope="col">Dosis</th>
-        <th scope="col">Subfamilia</th>
+        <th scope="col" style="background: #20639B">Fora guia</th> <!--Current-->
+        <th scope="col" style="background: #20639B">Dosis</th>
+        <th scope="col" style="background: #3CAEA3;">Substituir per</th><!--Alternative-->
+        <th scope="col" style="background: #3CAEA3;" >Dosis</th>
+        <th scope="col" style="background: #F6D55C">Subfamilia</th>
 
 <!--        <th scope="col">Edit</th>-->
 <!--        <th scope="col">Delete</th>-->
     </tr>
     </thead>
     <tbody>
-    <tr th:each="exchange : ${exchanges}">
+    <tr th:each="exchange : ${exchanges}" class="text-center border border-dark">
 <!--        <td th:text="${exchange.id}" scope="row" class="d-none"></td>-->
         <td th:text="${exchange.getCurrentDrug().getName()}"></td>
         <td th:text="${exchange.getCurrentDrug().getDose()}"></td>

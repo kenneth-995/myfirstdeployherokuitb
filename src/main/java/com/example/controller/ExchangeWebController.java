@@ -94,6 +94,8 @@ public class ExchangeWebController {
                                         @ModelAttribute("namealternative") String name){
         System.out.println("Recived name alternative = " + name);
 
+        if (name == null)
+            System.out.println("[exchangewebcontroller]: name == null");
         model.addAttribute("exchanges", exchangeService.findByAlternativeNameWeb(name));
 
         return "listexchange";

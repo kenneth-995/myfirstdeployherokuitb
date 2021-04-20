@@ -71,7 +71,8 @@ public class ExchangeRestController {
     public ResponseEntity<?> getBySubfamilyName(@PageableDefault Pageable pageable,
                                               @RequestParam("name") String name,
                                               HttpServletRequest request) {
-        Page<Exchange> result = exchangeService.findBySubfamilyNameQuery(name, pageable);
+//        Page<Exchange> result = exchangeService.findBySubfamilyNameQuery(name, pageable);
+        Page<Exchange> result = exchangeService.findBySubfamily_Name(name, pageable);
         if (result.isEmpty())
             throw new ExchangeNotFoundException();
         else {

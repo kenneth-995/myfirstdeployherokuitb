@@ -34,10 +34,10 @@ public class ExchangeService extends BaseService<Exchange, Long, ExchangeReposit
     }
 
     //funciona pero con el nombre exacto, sino no encuentra
-    public Page<Exchange> findBySubfamilyName(String name, Pageable pageable) {
+    public Page<Exchange> findBySubfamily_Name(String name, Pageable pageable) {
         return this.repositorio.findBySubfamily_Name(name, pageable);
     }
-
+    //TODO findBySubfamily_Name() no busca bien
     public Page<Exchange> findBySubfamilyNameQuery(String name, Pageable pageable) {
         return this.repositorio.findBySubfamilyNameQuery(name, pageable);
     }
