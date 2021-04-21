@@ -26,6 +26,9 @@ insert into Drug(id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Ac. Asc
 insert into Drug(id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Miconazol ( Fungisdin oral 2% gel, Daktarin oral 2% gel )', '100mg / 6h Adults (50 mg nens i 25 mg lactants)'); /*#alternativo*/
 insert into Drug(id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Clorhexidina 2% Colutori Bucal', '12 ml / 8h'); /*#alternativo*/
 
+insert into Drug(id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Miconazol (Daktarin oral 2% gel)', ' - ');
+insert into Drug(id, name, dose) values (NEXTVAL('hibernate_sequence'), 'Nistatina ( Mycostatin 100000 UI/ ml suspensió oral )', ' - ');
+
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 9, 13, 5);
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 10, 13, 5);
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 11, 13, 5);
@@ -43,6 +46,9 @@ insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values 
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 23, 27, 6);
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 24, 13, 6);
 insert into exchange (id, currentdrugid, alternativedrugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 25, 13, 6);
+
+insert into Included_guide (id, drugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 28, 6);
+insert into Included_guide (id, drugid, subfamilyid) values (NEXTVAL('hibernate_sequence'), 29, 6);
 
 
 

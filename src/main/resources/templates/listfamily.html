@@ -31,6 +31,11 @@
 
 <div class="mt-5 mb-4 text-center"><h3>Familias de patologías</h3></div>
 
+<div th:if="${error}" style="color: red">
+    <!--    No es pot borrar el registre-->
+    <span th:text="${errormessage}"> asdasd</span>
+</div>
+
 <table class="table">
     <thead>
     <tr class="text-center">
@@ -57,10 +62,16 @@
 
 
     <div class="form-row mb-4 ">
-        <form method="get"
+        <form method="post"
             action="#"
             th:action="@{/web/family/list/findbyname}">
-            <input type="text" id="name" placeholder="find by name" class="form-control">
+            <input
+                    th:value="*{name}"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="find by name"
+                    class="form-control">
             <div class="form-group text-center" >
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Find</button>
             </div>

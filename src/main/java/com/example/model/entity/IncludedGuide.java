@@ -1,18 +1,27 @@
 package com.example.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
-@Table(name = "incluido_guia")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class IncludedGuide {
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "drud_id")
+    @JoinColumn(name = "drugid")
     private Drug drug;
 
     @ManyToOne
-    @JoinColumn(name = "subfamily_id")
+    @JoinColumn(name = "subfamilyid")
     private Subfamily subfamily;
 }

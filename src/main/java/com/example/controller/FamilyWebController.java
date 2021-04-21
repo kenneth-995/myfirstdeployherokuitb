@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import com.example.error.Family.FamilyNotFoundException;
 import com.example.model.entity.Family;
 import com.example.model.service.FamilyService;
 import lombok.RequiredArgsConstructor;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,19 +20,24 @@ public class FamilyWebController {
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("familyList", familyService.findAll());
-        return "listfamily"; //listfamily.html recojera los datos del Model model
+        model.addAttribute("name", "");
+        model.addAttribute("error", false);
+        model.addAttribute("errormessage", "");
+        return "listfamily";
     }
 
     @GetMapping("/list/orderbyname")
     public String listOrderByname(Model model) {
         model.addAttribute("familyList", familyService.findAllOrderByName());
-        return "listfamily"; //listfamily.html recojera los datos del Model model
+        return "listfamily";
     }
 
-    @GetMapping("/list/findbyname") // http://localhost:5000/family/list/findbyname?name=ANTI
-    public String findByname(Model model, @RequestParam(value = "name") String name) {
+    @PostMapping("/list/findbyname")
+    public String findByname(Model model,
+                             @ModelAttribute("name") String name) {
+        System.out.println("[family web controller] param name: "+ name);
         model.addAttribute("familyList", familyService.findByName(name));
-        return "listfamily"; //listfamily.html recojera los datos del Model model
+        return "listfamily";
     }
 
     @GetMapping("/new")
@@ -61,12 +68,21 @@ public class FamilyWebController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id")Long id){
-        Family family = familyService.findById(id).orElse(null);
-        if (family != null)
+    public String delete(Model model,
+                         @PathVariable(value = "id")Long id){
+        Family family = familyService.findById(id).orElseThrow(()-> new FamilyNotFoundException(id));
+        try {
             familyService.delete(family);
+        } catch (Exception ex) {
+            model.addAttribute("error", true);
+            model.addAttribute("errormessage", ex.getCause());
+            System.out.println("[family web controller]: " + ex.getMessage());
+        }
+        model.addAttribute("familyList", familyService.findAll());
 
-        return "redirect:/web/family/list";
+
+        //return "redirect:/web/family/list";
+        return "listfamily";
     }
 
 

@@ -52,6 +52,10 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
                 .antMatchers("/web/exchange/**").permitAll()
                 .antMatchers("/web/exchange/list/**").permitAll()
                 .antMatchers("/web/exchange/new/**").permitAll()
+
+                .antMatchers("/web/includedguide/**").permitAll()
+                .antMatchers("/web/includedguide/list/**").permitAll()
+                .antMatchers("/web/includedguide/new/**").permitAll()
                 //API
                 .antMatchers("/api/family/**").permitAll()
                 .antMatchers("/api/family/list/**").permitAll()
