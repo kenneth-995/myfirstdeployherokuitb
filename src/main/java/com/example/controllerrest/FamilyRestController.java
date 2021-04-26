@@ -31,6 +31,7 @@ public class FamilyRestController {
     private final PaginationLinksUtil paginationLinksUtil;
 
     //get page
+    //@CrossOrigin(value = "http://localhost:4200")
     @GetMapping("/")
     public ResponseEntity<?> list(@PageableDefault(size = 10, page = 0) Pageable pageable, HttpServletRequest request) {
         Page<Family> result = familyService.findAll(pageable);
