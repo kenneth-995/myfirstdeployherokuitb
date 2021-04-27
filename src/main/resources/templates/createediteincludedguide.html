@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        Hello, authenticated as <span sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" value="Logout" />
+        </form>
+        <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <a href="/web/includedguide/">Lista incluidos en la guia</a>
+        </div>
+        <div class="col-12">
+            <a href="/">Ir a la pagina principal</a>
+        </div>
+    </div>
+
+    <div class="">
+
+        <form method="post"
+              action="#"
+              th:object="${included}"
+              th:action="${included.id!=null}?@{/web/includedguide/edit/submit}:@{/web/includedguide/new/submit}">
+
+            <h3 class="mt-3" th:text="${included.id!=null}?@{Editar incluido en guia}:@{Crear incluido en guia}"></h3>
+            <div class="form-group">
+<!--                <label> Id </label>-->
+                <input th:contenteditable="${false}"
+                       type="text"
+                       id="id"
+                       placeholder=""
+                       th:field="*{id}"
+                       th:attrappend="readonly=${included.id!=0}?'readonly':null"
+                       class="form-control d-none">
+            </div>
+
+            <div class="form-group">
+                <label> Drug </label><br/>
+
+                <select th:field="*{drugid}" class="form-select" aria-label="Default select example">
+                    <option th:value="0" th:selected="${included.id!=null}?@{true}:@{false}"> Selecciona un fármaco</option>
+
+                    <option th:each="drug : ${drugs}"
+                            th:value="${drug.getId()}"
+                            th:text="${drug.getName()}"
+                            th:selected="${drug.getId()}==${included.drugid}">
+                    </option>
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+                <label> Subfamily </label><br/>
+                <select th:field="*{subfamilyId}" class="form-select">
+                    <option th:value="0" th:selected="${included.id!=null}?@{true}:@{false}"> Selecciona una subfamília</option>
+
+                    <option th:each="subfamily : ${subfamilies}"
+                            th:value="${subfamily.getId()}"
+                            th:text="${subfamily.getName()}"
+                            th:selected="${subfamily.getId()}==${included.subfamilyId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group text-center" >
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
