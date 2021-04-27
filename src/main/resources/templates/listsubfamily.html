@@ -41,6 +41,9 @@
     </tr>
     </thead>
     <tbody>
+    <div th:if="${subfamilyList.size() == 0}" style="color: red">
+        No se encontraron resultados
+    </div>
     <tr th:each="subfamily : ${subfamilyList}" class="text-center">
         <td th:text="${subfamily.id}" scope="row" class="d-none">ID</td>
         <td th:text="${subfamily.name}" class="text-left"></td>

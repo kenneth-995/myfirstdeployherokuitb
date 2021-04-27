@@ -97,6 +97,9 @@
     </tr>
     </thead>
     <tbody>
+    <div th:if="${exchanges.size() == 0}" style="color: red">
+        No se encontraron resultados
+    </div>
     <tr th:each="exchange : ${exchanges}" class="text-center border border-dark">
 <!--        <td th:text="${exchange.id}" scope="row" class="d-none"></td>-->
         <td th:text="${exchange.getCurrentDrug().getName()}"></td>

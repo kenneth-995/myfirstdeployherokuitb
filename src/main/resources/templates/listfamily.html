@@ -48,6 +48,9 @@
     </tr>
     </thead>
     <tbody>
+    <div th:if="${familyList.size() == 0}" style="color: red">
+        No se encontraron resultados
+    </div>
     <tr th:each="family : ${familyList}" class="text-center">
         <td th:text="${family.id}" class="d-none"></td>
         <td th:text="${family.name}"></td>
