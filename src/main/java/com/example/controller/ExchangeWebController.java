@@ -82,7 +82,6 @@ public class ExchangeWebController {
     @PostMapping("/findbycurrentname")
     public String findByCurrentName(Model model,
                                     @ModelAttribute("namecurrent") String name){
-        System.out.println("Recived name current = " + name);
 
         model.addAttribute("exchanges", exchangeService.findByCurrentNameWeb(name));
 
@@ -92,7 +91,6 @@ public class ExchangeWebController {
     @PostMapping("/findbyalternativename")
     public String findByAlternativeName(Model model,
                                         @ModelAttribute("namealternative") String name){
-        System.out.println("Recived name alternative = " + name);
 
         if (name == null)
             System.out.println("[exchangewebcontroller]: name == null");

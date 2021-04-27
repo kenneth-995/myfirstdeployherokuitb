@@ -56,7 +56,6 @@ public class IncludedGuideWebController {
     @PostMapping("/findbydrugname")
     public String findByCurrentName(Model model,
                                     @ModelAttribute("namedrug") String name){
-        System.out.println("Recived namedrug = " + name);
 
         model.addAttribute("includes", includedGuideService.findByDrugNameWeb(name));
 
@@ -66,7 +65,6 @@ public class IncludedGuideWebController {
     @PostMapping("/findbysubfamilyname")
     public String findBySubfamilyName(Model model,
                                     @ModelAttribute("namesubfamily") String name){
-        System.out.println("Recived subfamily = " + name);
 
         model.addAttribute("includes", includedGuideService.findBySubfamilyNameWeb(name));
 
